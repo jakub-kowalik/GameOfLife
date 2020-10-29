@@ -17,7 +17,6 @@ public class Generator {
     public static void generate(boolean[][] universe) {
         boolean[][] copyOfUniverse = deepCopyArray(universe);
 
-
         for (int i = 0; i < universe.length; i++) {
             for (int j = 0; j < universe.length; j++) {
 
@@ -28,10 +27,8 @@ public class Generator {
                         universe[i][j] = true;
                     }
                 }
-
             }
         }
-
     }
 
     public static boolean[][] deepCopyArray(boolean[][] booleans) {
@@ -41,6 +38,7 @@ public class Generator {
                 deepCopy[i][j] = booleans[i][j];
             }
         }
+
         return deepCopy;
     }
 
@@ -163,5 +161,4 @@ public class Generator {
             }
         }
     }
-
 }

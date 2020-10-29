@@ -7,34 +7,32 @@ public class Main {
 
         int universeSize = 50;
 
-        GameOfLife gameOfLife = new GameOfLife();
-        Universe universe = new Universe(universeSize);
-        UniverseController universeController = new UniverseController(universe, gameOfLife);
+        UniverseView universeView = new UniverseView();
+        UniverseModel universeModel = new UniverseModel(universeSize);
+        UniverseController universeController = new UniverseController(universeModel, universeView);
 
-        gameOfLife.setUniverseController(universeController);
+        universeView.setUniverseController(universeController);
 
         universeController.createUniverse();
 
         while (true) {
-            if (!universe.isPaused()) {
+            if (!universeModel.isPaused()) {
                 universeController.nextGeneration();
-
             }
 
-            universeController.view.repaintUniverse(universe.getBooleanArrays());
-            universeController.view.generationLabel.setText("Generation #" + universe.getGeneration());
+            universeController.view.repaintUniverse(universeModel.getBooleanArrays());
+            universeController.view.generationLabel.setText("Generation #" + universeModel.getGeneration());
             universeController.view.aliveLabel.setText("Alive: " + universeController.aliveCells());
             //printUniverse(universe, i, universeController.aliveCells());
             Thread.sleep(1000);
-
         }
     }
 
-    public static void printUniverse(Universe universe, int generation, int aliveCells) {
+    public static void printUniverse(UniverseModel universeModel, int generation, int aliveCells) {
         clearConsole();
         System.out.println("Generation #" + generation);
         System.out.println("Alive: " + aliveCells);
-        System.out.println(universe);
+        System.out.println(universeModel);
     }
 
     public static void clearConsole() {

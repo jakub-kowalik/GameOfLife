@@ -1,57 +1,60 @@
 package life;
 
 public class UniverseController {
-    Universe universe;
-    GameOfLife view;
+    UniverseModel universeModel;
+    UniverseView view;
 
-    public UniverseController(Universe universe, GameOfLife view) {
-        this.universe = universe;
+    public UniverseController(UniverseModel universeModel, UniverseView view) {
+        this.universeModel = universeModel;
         this.view = view;
     }
 
     public void createUniverse() {
-        universe.resetRandom();
-        for (int i = 0; i < universe.getBooleanArrays().length; i++) {
-            for (int j = 0; j < universe.getBooleanArrays()[i].length; j++) {
-                universe.getBooleanArrays()[i][j] = false;
+        universeModel.resetRandom();
+        for (int i = 0; i < universeModel.getBooleanArrays().length; i++) {
+            for (int j = 0; j < universeModel.getBooleanArrays()[i].length; j++) {
+                universeModel.getBooleanArrays()[i][j] = false;
             }
         }
 
-        for (int i = 0; i < universe.getBooleanArrays().length; i++) {
-            for (int j = 0; j < universe.getBooleanArrays()[i].length; j++) {
-                universe.getBooleanArrays()[i][j] = universe.getRandom().nextBoolean();
+        for (int i = 0; i < universeModel.getBooleanArrays().length; i++) {
+            for (int j = 0; j < universeModel.getBooleanArrays()[i].length; j++) {
+                universeModel.getBooleanArrays()[i][j] = universeModel.getRandom().nextBoolean();
             }
         }
-        universe.setGeneration(0);
+
+        universeModel.setGeneration(0);
     }
 
     public void nextGeneration() {
-        Generator.generate(universe.getBooleanArrays());
-        universe.setGeneration(universe.getGeneration() + 1);
+        Generator.generate(universeModel.getBooleanArrays());
+        universeModel.setGeneration(universeModel.getGeneration() + 1);
     }
 
     public int aliveCells() {
         int alive = 0;
-        for (int i = 0; i < universe.getBooleanArrays().length; i++) {
-            for (int j = 0; j < universe.getBooleanArrays().length; j++) {
-                if (universe.getBooleanArrays()[i][j]) {
+
+        for (int i = 0; i < universeModel.getBooleanArrays().length; i++) {
+            for (int j = 0; j < universeModel.getBooleanArrays().length; j++) {
+                if (universeModel.getBooleanArrays()[i][j]) {
                     alive++;
                 }
             }
         }
+
         return alive;
     }
 
     public void togglePause() {
-        universe.setPaused(!universe.isPaused());
+        universeModel.setPaused(!universeModel.isPaused());
     }
 
     public void setPaused() {
-        universe.setPaused(true);
+        universeModel.setPaused(true);
     }
 
     public void setUnpaused() {
-        universe.setPaused(false);
+        universeModel.setPaused(false);
     }
 
 }

@@ -6,16 +6,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
-public class GameOfLife extends JFrame {
+public class UniverseView extends JFrame {
 
     UniverseController universeController;
+
     JPanel universeView = new JPanel();
     JLabel generationLabel = new JLabel("", SwingConstants.LEFT);
     JLabel aliveLabel = new JLabel("", SwingConstants.LEFT);
+
     JToggleButton playButton = new JToggleButton();
     JButton resetButton = new JButton();
 
-    public GameOfLife() {
+    public UniverseView() {
         super("Game of Life");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 600);
@@ -54,7 +56,6 @@ public class GameOfLife extends JFrame {
         resetButton.setText("Reset");
         resetButton.addActionListener(actionEvent -> {
             universeController.createUniverse();
-            universeController.nextGeneration();
         });
         add(resetButton);
 
@@ -68,6 +69,7 @@ public class GameOfLife extends JFrame {
         universeView.removeAll();
         universeView.setLayout(new GridLayout(booleans.length, booleans.length));
         universeView.setBounds(230, 5, 550, 550);
+
         for (int i = 0; i < booleans.length; i++) {
             for (int j = 0; j < booleans.length; j++) {
                 JPanel cell = new JPanel();
@@ -80,6 +82,7 @@ public class GameOfLife extends JFrame {
                 universeView.add(cell);
             }
         }
+
         universeView.revalidate();
         universeView.repaint();
     }
